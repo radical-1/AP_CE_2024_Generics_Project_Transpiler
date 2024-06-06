@@ -87,4 +87,44 @@ public class Testcases {
         assertEquals(c.parseToAST(), java.parseToAST());
         assertEquals(uniques.size(), 1);
     }
+    @Test
+    public void testForDebugging() throw IOExeption, URISyntaxException {
+        String cCode = new String(Files.readAllBytes(Paths.get(
+                Objects.requireNonNull(getClass().getResource("test1.c")).toURI())));
+        String javaCode = new String(Files.readAllBytes(Paths.get(
+                Objects.requireNonNull(getClass().getResource("test2.j")).toURI())));
+        String rustCode = new String(Files.readAllBytes(Paths.get(
+                Objects.requireNonNull(getClass().getResource("test3.rs")).toURI())));
+        C c = new C(cCode);
+        AbstractSyntaxTree treeForC = c.parseToAST();
+        Java java = new Java(javaCode);
+        AbstractSyntaxTree treeForJava = java.parseToAST();
+        Rust rust = new Rust(rustCode);
+        AbstractSyntaxTree treeForRust = rust.parseToAST();
+        Transpiler<Code> transpilerForC = new Transpiler();
+        transpilerForC.addCode(new Java(treeForC));
+        transpilerForC.addCode(new Rust(treeForC));
+        for(String code; transpilerForC.getCodes()) {
+            System.out.println(code);
+            System.out.println("..........................................");
+        }
+        System.out.println("/////////////////////////////////////////");
+        Transpiler<Code> transpilerForJava = new Transpiler();
+        transpilerForJava.addCode(new C(treeForC));
+        transpilerForJava.addCode(new Rust(treeForC));
+        for(String code; transpilerForJava.getCodes()) {
+            System.out.println(code);
+            System.out.println("..........................................");
+        }
+        System.out.println("/////////////////////////////////////////");
+        Transpiler<Code> transpilerForRust = new Transpiler();
+        transpilerForRust.addCode(new Java(treeForC));
+        transpilerForRust.addCode(new C(treeForC));
+        for(String code; transpilerForRust.getCodes()) {
+            System.out.println(code);
+            System.out.println("..........................................");
+        }
+        System.out.println("/////////////////////////////////////////");
+
+
 }
