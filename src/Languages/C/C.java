@@ -1,10 +1,8 @@
 package Languages.C;
 
 import Languages.Code;
-import Languages.Java.Java;
 import Transpiler.AbstractSyntaxTree;
 import Transpiler.RuleType;
-
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -45,7 +43,6 @@ public class C extends Code {
          * @param tree: The AST (Abstract Syntax Tree) of the program we want to generate the code for.
          * @return  The generated C program code for the given AST.
          */
-        // TODO: Generate the Code from the given AST
         StringBuilder code = new StringBuilder();
         AbstractSyntaxTree root = this.ast;
         if(root == null) return code.toString();

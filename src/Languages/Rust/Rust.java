@@ -1,7 +1,6 @@
 package Languages.Rust;
 
 import Languages.Code;
-import Languages.Java.Java;
 import Transpiler.AbstractSyntaxTree;
 import Transpiler.RuleType;
 

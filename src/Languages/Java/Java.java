@@ -1,15 +1,10 @@
 package Languages.Java;
 
-import Languages.C.C;
 import Languages.Code;
-import Languages.Rust.Rust;
 import Transpiler.AbstractSyntaxTree;
-import Transpiler.NodeType;
 import Transpiler.RuleType;
 
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class Java extends Code {
     public Java(String code) {
@@ -46,7 +41,6 @@ public class Java extends Code {
          * This function reverses the parsing process to generate a string code for the given AST.
          * @return The generated Java program code for the given AST.
          */
-        // TODO: Generate the Code from the given AST
         StringBuilder code = new StringBuilder();
         AbstractSyntaxTree root = this.ast;
         if (root == null) return code.toString();
